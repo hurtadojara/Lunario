@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
     <Navbar />
         <Switch>
-          <Route exact path="/" component={Calendar} />
+          <Route exact path="/calendar" component={Calendar} />
         </Switch>
         <footer>
 

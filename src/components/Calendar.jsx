@@ -8,7 +8,7 @@ class Calendar extends React.Component {
   };
 
   renderHeader() {
-    const dateFormat = "MM yyyy";
+    const dateFormat = "MMMM yyyy";
 
     return (
       <div className="header row flex-middle">

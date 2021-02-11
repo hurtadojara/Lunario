@@ -8,12 +8,6 @@ class Cal extends React.Component {
     return (
       <div className="App">
         <header>
-          <div id="logo">
-            <span className="icon">date_range</span>
-            <span>
-              <b>Lunario</b>
-            </span>
-          </div>
         </header>
         <main>
           <Calendar />
