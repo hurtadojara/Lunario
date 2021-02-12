@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
-import Calendar from "./Cal"
+import EventsCalendar from "./Cal"
 
 function App() {
   return (
     <BrowserRouter>
     <Navbar />
+    <EventsCalendar />
         <Switch>
-          <Route exact path="/calendar" component={Calendar} />
+          <Route exact path="/calendar" component={Navbar} />
         </Switch>
         <footer>
 
