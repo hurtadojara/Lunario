@@ -100,9 +100,11 @@ main {
 .calendar {
   display: block;
   position: relative;
-  width: 100%;
+  margin-top: -50px;
+  width: 134%;
   background: var(--neutral-color);
-  border: 1px solid var(--border-color);
+  border: 10px solid var(--border-color);
+  border-radius: 20px;
 }
 
 .calendar .header {
