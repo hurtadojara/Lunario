@@ -9,8 +9,8 @@ require('moment/locale/es.js');
 
 const myEventsList= [{
   title: "today",
-  start: new Date('2019-05-05 10:22:00'),
-  end: new Date('2019-05-05 10:42:00')
+  start: new Date('2021-05-05 10:22:00'),
+  end: new Date('2021-05-05 10:42:00')
 },
 {
   title: "string",
@@ -27,6 +27,7 @@ const myEventsList= [{
         startAccessor="start"
         endAccessor="end"
       />
+      <button variant="outlined" size="large">Create Event</button>
     </div>);
     }
   }
