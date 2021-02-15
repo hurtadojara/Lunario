@@ -8,7 +8,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 
 def main():
@@ -36,21 +36,28 @@ def main():
 
     service = build('calendar', 'v3', credentials=creds)
 
-    # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                        maxResults=10, singleEvents=True,
-                                        orderBy='startTime').execute()
-    events = events_result.get('items', [])
+    event = {
+        "summary": "Test de API",
+        "location": "Holberton",
+        "description": "Reunión",
+        "end": {
+            "dateTime": "2021-02-15T22:00:00-05:00",
+            "timeZone": "America/Bogota",
+            },
+        "start": {
+            "dateTime": "2021-02-15T20:00:00-05:00",
+            "timeZone": "America/Bogota",
+            },
+        "recurrence": [
+            "RRULE:FREQ=DAILY;COUNT=2"
+        ],
+        "attendees": [
+            {"email": "juanuribe513@gmail.com"},
+        ],
+    }
 
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
-
+    event = service.events().insert(calendarId='primary', body=event).execute()
+    print('Event created: {}'.format(event.get('htmlLink')))
 
 if __name__ == '__main__':
     main()
-
