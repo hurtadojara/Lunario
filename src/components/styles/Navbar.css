@@ -29,4 +29,35 @@
 
 .fuente2 {
   color: black;
+  margin-right: 80%;
+}
+
+.login {
+  color: white;
+  display: inline-block;
+  border: none;
+  background-color: #2590FF ;
+  margin-right: 10px;
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.login:hover {
+  background-color: rgb(55, 209, 209);
+}
+
+.singin {
+  color: white;
+  display: inline-block;
+  border: none;
+  background-color: #2590FF ;
+  margin-right: 10px;
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.singin:hover {
+  background-color: rgb(55, 209, 209);
 }
