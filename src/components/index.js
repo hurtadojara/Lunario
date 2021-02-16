@@ -3,7 +3,7 @@ const app = express()
 let {PythonShell} = require('python-shell')
 
     function runOauth(){
-        return PythonShell.run('./scripts_API/oauth.py', null, function (err) {
+        return ('./scripts_API/Oauth2.js', null, function (err) {
         if (err) throw err;
         console.log('finished');
       });
