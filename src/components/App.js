@@ -7,12 +7,10 @@ function App() {
   return (
     <BrowserRouter>
     <Navbar />
-    <EventsCalendar />
         <Switch>
-          <Route exact path="/calendar" component={Navbar} />
+          <Route exact path="/" component={EventsCalendar} />
         </Switch>
         <footer>
-
         </footer>
     </BrowserRouter>
   );

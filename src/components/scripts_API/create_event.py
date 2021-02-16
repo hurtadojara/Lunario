@@ -37,22 +37,22 @@ def main():
     service = build('calendar', 'v3', credentials=creds)
 
     event = {
-        "summary": "Test de API",
+        "summary": "POR MEDIO DE API API",
         "location": "Holberton",
         "description": "Reunión",
         "end": {
-            "dateTime": "2021-02-15T22:00:00-05:00",
+            "dateTime": "2021-02-16T22:00:00-05:00",
             "timeZone": "America/Bogota",
             },
         "start": {
-            "dateTime": "2021-02-15T20:00:00-05:00",
+            "dateTime": "2021-02-16T20:00:00-05:00",
             "timeZone": "America/Bogota",
             },
         "recurrence": [
             "RRULE:FREQ=DAILY;COUNT=2"
         ],
-        "attendees": [
-            {"email": "juanuribe513@gmail.com"},
+        "attendees": [  
+            {"email": "andreshurtadojaramillo@gmail.com"},
         ],
     }
 
