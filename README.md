@@ -69,6 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-Install sudo npm -g nodemon
-run it with npm run dev
+sudo npm install -g nodemon
+run it with "npm run dev (locally)" if youre uploading to your domain use "npm run dev build"
 DONT MOVE THE FOLDERS

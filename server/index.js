@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 let {PythonShell} = require('python-shell')
+var cors = require('cors');
+
+app.use(cors())
 
     function runOauth(){
         return PythonShell.run('./scripts_API/oauth.py', null, function (err) {
