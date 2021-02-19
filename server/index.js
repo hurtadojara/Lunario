@@ -2,9 +2,6 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 let {PythonShell} = require('python-shell')
-var cors = require('cors');
-
-app.use(cors())
 
     app.use(cors());
 
