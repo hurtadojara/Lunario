@@ -1,6 +1,19 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 let {PythonShell} = require('python-shell')
+
+    app.use(cors());
+    var whitelist = ['hhtp://localhost:3000']
+    var corsOptions = {
+      origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) != -1) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      }
+    }
 
     function runOauth(){
         return PythonShell.run('./scripts_API/oauth.py', null, function (err) {
@@ -16,7 +29,7 @@ let {PythonShell} = require('python-shell')
       });
       }
       
-      app.get('/oauth', function (req, res) {
+      app.get('/oauth', cors(corsOptions),function (req, res) {
         const subprocess = runOauth()
         res.set('Content-Type', 'text/plain');
         subprocess.stdout.pipe(res)
