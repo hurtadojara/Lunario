@@ -21,6 +21,7 @@ const myEventsList= [{
 
   class EventsCalendar extends Component {  
     componentDidMount() {
+      alert("OELOOO");
       axios.get("/oauth", { crossdomain: true })
       .then( (response) => {
       this.setState({response: response})
@@ -28,6 +29,7 @@ const myEventsList= [{
       .catch( (error) => {
       console.log(error);
     })
+    alert("x2");
     }
     render() {
     return (
