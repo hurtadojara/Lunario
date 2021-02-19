@@ -4,7 +4,9 @@ const cors = require('cors')
 let {PythonShell} = require('python-shell')
 
     app.use(cors());
+
     var whitelist = ['hhtp://localhost:3000']
+    
     var corsOptions = {
       origin: function (origin, callback) {
         if (whitelist.indexOf(origin) != -1) {
