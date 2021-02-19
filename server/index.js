@@ -5,8 +5,7 @@ let {PythonShell} = require('python-shell')
 
     app.use(cors());
 
-    var whitelist = ['http://localhost:3000']
-    
+    var whitelist = ['http://localhost:3000', 'https://hurtadojara.me']
     var corsOptions = {
       origin: function (origin, callback) {
         if (whitelist.indexOf(origin) != -1) {
