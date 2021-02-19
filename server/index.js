@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 let {PythonShell} = require('python-shell')
 
+    app.use(cors);
     app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
       res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -27,15 +28,16 @@ let {PythonShell} = require('python-shell')
       app.get('/oauth', function (req, res, next) {
         const subprocess = runOauth()
         res.set('Content-Type', 'text/plain');
-        subprocess.stdout.pipe(res)
-        subprocess.stderr.pipe(res)
+        subprocess.stdout.pipe(res);
+        subprocess.stderr.pipe(res);
+        next();
       })
 
       app.post('/createevent', function (req, res) {
         const subprocess = runEvent()
         res.set('Content-Type', 'text/plain');
-        subprocess.stdout.pipe(res)
-        subprocess.stderr.pipe(res)
+        subprocess.stdout.pipe(res);
+        subprocess.stderr.pipe(res);
       });
 
 

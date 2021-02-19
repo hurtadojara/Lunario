@@ -21,7 +21,7 @@ const myEventsList= [{
 
   class EventsCalendar extends Component {  
     componentDidMount() {
-      axios.get("http://localhost:8080/oauth")
+      axios.get("/oauth", { crossdomain: true })
       .then( (response) => {
       this.setState({response: response})
       })
