@@ -4,18 +4,11 @@ const cors = require('cors')
 let {PythonShell} = require('python-shell')
 
     app.use(cors());
-
-    var whitelist = ['http://localhost:3000']
-    
-    var corsOptions = {
-      origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) != -1) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'))
-        }
-      }
-    }
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "https://localhost:3000"); // update to match the domain you will make the request from
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
 
     function runOauth(){
         return PythonShell.run('./scripts_API/oauth.py', null, function (err) {
@@ -31,7 +24,7 @@ let {PythonShell} = require('python-shell')
       });
       }
       
-      app.get('/oauth', cors(corsOptions),function (req, res) {
+      app.get('/oauth', function (req, res, next) {
         const subprocess = runOauth()
         res.set('Content-Type', 'text/plain');
         subprocess.stdout.pipe(res)
