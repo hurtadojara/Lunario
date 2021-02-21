@@ -1,56 +1,24 @@
 {
-  "name": "calendar",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
-    "child_process": "^1.0.2",
-    "cors": "^2.8.5",
-    "date-fns": "^2.17.0",
-    "express": "^4.17.1",
-    "moment": "^2.29.1",
-    "python-shell": "^2.0.3",
-    "react": "^17.0.1",
-    "react-big-calendar": "^0.31.0",
-    "react-dom": "^17.0.1",
-    "react-moment": "^1.1.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0"
-  },
+  "name": "lunario",
+  "version": "1.0.0",
+  "description": "scheduling project",
+  "main": "index.js",
   "scripts": {
-    "server": "node-env-run server",
-    "dev": "run-p server start",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hurtadojara/Lunario.git"
   },
-  "proxy": "http://localhost:8080",
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hurtadojara/Lunario/issues"
   },
-  "devDependencies": {
-    "node-env-run": "^4.0.2",
-    "npm-run-all": "^4.1.5"
+  "homepage": "https://github.com/hurtadojara/Lunario#readme",
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
