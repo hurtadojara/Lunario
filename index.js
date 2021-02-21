@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+let {PythonShell} = require('python-shell')
 
 const app = express();
 
@@ -13,11 +14,41 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // An api endpoint that returns a short list of items
-app.get('/api/getList', (req,res) => {
-    var list = ["item1", "item2", "item3"];
-    res.json(list);
-    console.log('Sent list of items');
-});
+function runOauth(){
+    return PythonShell.run('./scripts_API/oauth.py', null, function (err) {
+    if (err) throw err;
+    console.log('finished');
+  });
+  }
+
+  function runEvent(){
+    return PythonShell.run('./scripts_API/create_event.py', null, function (err) {
+    if (err) throw err;
+    console.log('finished');
+  });
+  }
+  app.get('/prueba', function (req, res, next) {
+    alert("pana yaaa");
+    res.set('Content-Type', 'text/plain');
+    subprocess.stdout.pipe(res);
+    subprocess.stderr.pipe(res);
+    next();
+  });
+
+  app.get('/oauth', function (req, res, next) {
+    const subprocess = runOauth()
+    res.set('Content-Type', 'text/plain');
+    subprocess.stdout.pipe(res);
+    subprocess.stderr.pipe(res);
+    next();
+  })
+
+  app.post('/createevent', function (req, res) {
+    const subprocess = runEvent()
+    res.set('Content-Type', 'text/plain');
+    subprocess.stdout.pipe(res);
+    subprocess.stderr.pipe(res);
+  });
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{

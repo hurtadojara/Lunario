@@ -20,9 +20,7 @@ const myEventsList= [{
 
   class EventsCalendar extends Component {  
     componentDidMount() {
-      fetch("/api/getlist")
-      .then(res => res.json())
-      console.log("BIEN HECHO PAPI");
+      fetch("/oauth")
     };
     render() {
     return (
