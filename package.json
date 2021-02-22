@@ -20,6 +20,8 @@
   "homepage": "https://github.com/hurtadojara/Lunario#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "python-shell": "^2.0.3"
+    "googleapis": "^39.2.0",
+    "python-shell": "^2.0.3",
+    "react-google-login": "^5.2.2"
   }
 }

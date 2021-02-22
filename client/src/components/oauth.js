@@ -10,26 +10,20 @@ class Oauth extends React.Component {
     handleItemClick(event: SyntheticEvent<any>, name: string): void {
       if (name === 'sign-in') {
         ApiCalendar.handleAuthClick();
-      } else if (name === 'sign-out') {
-        ApiCalendar.handleSignoutClick();
       }
     }
-
-    render() {
+    render(){
       return (
         <div>
             <button
                 onClick={(e) => this.handleItemClick(e, 'sign-in')}
             >
               sign-in
-            </button>
-            <button
-                onClick={(e) => this.handleItemClick(e, 'sign-out')}
-            >
-              sign-out
-            </button>
+            </button> 
             </div>
+            
         );
+        
     }
 }
 export default Oauth

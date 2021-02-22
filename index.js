@@ -22,13 +22,13 @@ function runOauth(){
   }
 
   function runEvent(){
-    return PythonShell.run('./scripts_API/create_event.py', null, function (err) {
+    return PythonShell.run('./scripts_API/print_events.py', null, function (err) {
     if (err) throw err;
     console.log('finished');
   });
   }
   app.get('/prueba', function (req, res, next) {
-    alert("pana yaaa");
+    const subprocess = runEvent();
     res.set('Content-Type', 'text/plain');
     subprocess.stdout.pipe(res);
     subprocess.stderr.pipe(res);
@@ -43,7 +43,7 @@ function runOauth(){
     next();
   })
 
-  app.post('/createevent', function (req, res) {
+  app.post('/createevent', function (req, res, next) {
     const subprocess = runEvent()
     res.set('Content-Type', 'text/plain');
     subprocess.stdout.pipe(res);
