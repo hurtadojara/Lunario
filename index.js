@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-let {PythonShell} = require('python-shell')
+const { spawn, execFile } = require('child_process');
 
 const app = express();
 
@@ -15,11 +15,9 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // An api endpoint that returns a short list of items
 function runOauth(){
-    return PythonShell.run('./scripts_API/oauth.py', null, function (err) {
-    if (err) throw err;
-    console.log('finished');
-  });
-  }
+  const child = execFile('./scripts_API/oauth.js', (error, stdout, stderr));
+    child.stdout.on('data', function(data) {
+      console.log(data.toString());
 
   function runEvent(){
     return PythonShell.run('./scripts_API/print_events.py', null, function (err) {

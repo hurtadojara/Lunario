@@ -20,7 +20,7 @@ const myEventsList= [{
 
   class EventsCalendar extends Component {  
     componentDidMount() {
-      //fetch("/prueba")
+      fetch("/oauth")
     };
     render() {
     return (
