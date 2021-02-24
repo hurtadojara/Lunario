@@ -13,7 +13,7 @@ function App() {
     <Login />
         <Switch>
           <Route exact path="/oauth" component={Login} />
-          <Route exact path="/oauth" component={Logout} />
+          <Logout />
         </Switch>
         <footer>
         </footer>
