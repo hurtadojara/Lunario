@@ -31,7 +31,6 @@ const myEventsList= [{
         startAccessor="start"
         endAccessor="end"
       />
-      <button variant="outlined" size="large">Create Event</button>
     </div>);
     }
   }

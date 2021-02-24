@@ -2,16 +2,18 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import EventsCalendar from "./Cal"
-import  Oauth from "./oauth"
+import Login from "./oauth"
+import Logout from "./Logout"
 
 function App() {
   return (
     <BrowserRouter>
     <Navbar />
     <EventsCalendar />
-    <Oauth />
+    <Login />
         <Switch>
-          <Route exact path="/oauth" component={Oauth} />
+          <Route exact path="/oauth" component={Login} />
+          <Route exact path="/oauth" component={Logout} />
         </Switch>
         <footer>
         </footer>
