@@ -19,9 +19,6 @@ const myEventsList= [{
 }]
 
   class EventsCalendar extends Component {  
-    componentDidMount() {
-      //fetch("/oauth")
-    };
     render() {
     return (
   <div style={{height:`${400}px`, backgroundColor:"white", margin:"15px", marginLeft:"300px"}} className="bigCalendar-container">
