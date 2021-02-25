@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../images/lunario_logo.png"
 import './styles/Navbar.css';
+import GoogleAuth from "./GoogleAuth"
 
 class Navbar extends React.Component {
   render() {
@@ -13,6 +14,9 @@ class Navbar extends React.Component {
             <span className="fuente1">Team</span>
             <span className="fuente2">Class</span>
           </Link>
+          <GoogleAuth>
+            Login
+            </GoogleAuth>
         </div>
       </div>
     );
