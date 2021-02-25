@@ -12,8 +12,6 @@ class Navbar extends React.Component {
             <img className= "Navbar__brand-logo" src={logo} alt="logo"/>
             <span className="fuente1">Team</span>
             <span className="fuente2">Class</span>
-            <button className="login">Log in</button>
-            <button className="singin">Sing in</button>
           </Link>
         </div>
       </div>

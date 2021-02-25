@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from "moment";
-import axios from 'axios';
 
 require('moment/locale/es.js');
   
@@ -21,14 +20,8 @@ const myEventsList= [{
 
   class EventsCalendar extends Component {  
     componentDidMount() {
-      axios.get("http://localhost:8080/oauth")
-      .then( (response) => {
-      this.setState({response: response})
-      })
-      .catch( (error) => {
-      console.log(error);
-    })
-    }
+      fetch("/oauth")
+    };
     render() {
     return (
   <div style={{height:`${400}px`, backgroundColor:"white", margin:"15px", marginLeft:"300px"}} className="bigCalendar-container">
@@ -38,7 +31,6 @@ const myEventsList= [{
         startAccessor="start"
         endAccessor="end"
       />
-      <button variant="outlined" size="large">Create Event</button>
     </div>);
     }
   }
