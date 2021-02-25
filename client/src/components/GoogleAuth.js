@@ -9,7 +9,7 @@ class GoogleAuth extends Component {
       window.gapi.auth2
         .init({
           client_id: process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_ID,
-          scope: "email",
+          scope: "https://www.googleapis.com/auth/calendar",
         })
         .then(() => {
           // create auth variable

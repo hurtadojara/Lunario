@@ -18,6 +18,8 @@ function runOauth(){
   const child = execFile('./scripts_API/oauth.js', (error, stdout, stderr));
     child.stdout.on('data', function(data) {
       console.log(data.toString());
+    })
+  }
 
   function runEvent(){
     return PythonShell.run('./scripts_API/print_events.py', null, function (err) {
