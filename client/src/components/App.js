@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import EventsCalendar from "./Cal"
+import FormEvent from "./FormEvent"
 
 function App() {
   return (
@@ -9,8 +10,9 @@ function App() {
     <Navbar />
     <EventsCalendar />
         <Switch>
-          <Route exact path="/oauth" component={Navbar} />
+          <Route exact path="/evento" component={Navbar} />
         </Switch>
+        <FormEvent />
         <footer>
         </footer>
     </BrowserRouter>
