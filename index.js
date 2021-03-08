@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
-const { spawn, execFile } = require('child_process');
+const { spawn, execFile, exec } = require('child_process');
+const { dbConnection, client } = require('./database-config');
+const e = require('method-override');
 
+//Initializations
 const app = express();
+dbConnection();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
