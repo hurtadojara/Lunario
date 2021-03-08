@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const { spawn, execFile } = require('child_process');
 const { dbConnection } = require('./db/db-config');
+const { insertMe } = require('./db/insert');
 
 const app = express();
 
