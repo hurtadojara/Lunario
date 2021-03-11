@@ -2,15 +2,14 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import EventsCalendar from "./Cal"
+import GoogleAuth from "./GoogleAuth"
 
 function App() {
   return (
     <BrowserRouter>
     <Navbar />
     <EventsCalendar />
-        <Switch>
-          <Route exact path="/oauth" component={Navbar} />
-        </Switch>
+    <GoogleAuth />
         <footer>
         </footer>
     </BrowserRouter>
