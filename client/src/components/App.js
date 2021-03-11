@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import EventsCalendar from "./Cal"
 import FormEvent from "./FormEvent"
+import GoogleAuth from "./GoogleAuth"
 
 function App() {
   return (
