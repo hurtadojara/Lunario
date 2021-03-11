@@ -36,6 +36,9 @@ const schema = {
   const onSubmit = ({formData}, e) => handleEvent(formData);
 
   function handleEvent(formData) {
+
+
+    CreateEvent()
     function CreateEvent(dict) {
       gapi.client.load('calendar', 'v3', function() {				
         var req = gapi.client.calendar.events.insert({
@@ -47,7 +50,6 @@ const schema = {
         });
       });
     }
-  
 
   }
 
