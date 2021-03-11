@@ -8,14 +8,35 @@ import Form from "react-jsonschema-form";
 var dict = [];
 
 const schema = {
-  title: "Todo",
-  type: "object",
-  required: ["title"],
-  properties: {
-    title: {type: "string", title: "Title", default: "A new task"},
-    done: {type: "boolean", title: "Done?", default: false}
+  "title": "Date and time widgets",
+  "type": "object",
+  "properties": {
+    "alternative": {
+      "title": "Alternative",
+      "description": "These work on most platforms.",
+      "type": "object",
+      "properties": {
+        "alt-datetime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
   }
-};
+}
+const uiSchema = {
+  "alternative": {
+    "alt-datetime": {
+      "ui:widget": "alt-datetime",
+      "ui:options": {
+        "yearsRange": [
+          1980,
+          2030
+        ]
+      }
+    }
+  }
+}
 
 
 
@@ -59,6 +80,7 @@ class FormEvent extends React.Component {
     return (
       <div>
   <Form schema={schema}
+        uiSchema={uiSchema}
         onSubmit={onSubmit} />
       </div>
   );
