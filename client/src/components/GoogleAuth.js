@@ -79,6 +79,22 @@ class GoogleAuth extends Component {
       $('#auth-status').html('You are currently signed in and have granted ' +
           'access to this app.');
           google_access_token = googleauth.currentUser.get().getAuthResponse().access_token
+          var resource = {
+            ///  "kind": "calendar#event",
+        
+            "alwaysIncludeEmail" : "true",
+            "singleEvents" : "true",
+            "orderBy" : "startTime",
+            "timeMax": {
+                "dateTime": "2013-10-01T00:00:00+10:00" //maxDate.toISOString()
+            },
+            "timeMin": {
+                "dateTime":  "2013-08-29T00:00:00+10:00" //startDateMin.toISOString()
+            }
+        };
+
+        
+    
     } else {
       $('#sign-in-or-out-button').html('Sign In/Authorize');
       $('#revoke-access-button').css('display', 'none');

@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-globals */
 import React from "react";
 import googleauth from './GoogleAuth'
-import Form from "react-jsonschema-form";
+import Form from '@rjsf/bootstrap-4';
 
 
 
@@ -122,7 +122,7 @@ function handleEvent(formData) {
 class FormEvent extends React.Component {
   render() {
     return (
-      <div>
+      <div className="Form">
         <Form schema={schema}
           uiSchema={uiSchema}
           onSubmit={onSubmit} />

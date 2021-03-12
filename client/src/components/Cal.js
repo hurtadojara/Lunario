@@ -3,6 +3,7 @@ import {Calendar, momentLocalizer} from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from "moment";
 
+
 require('moment/locale/es.js');
   
   const localizer = momentLocalizer(moment);
@@ -21,7 +22,7 @@ const myEventsList= [{
   class EventsCalendar extends Component {  
     render() {
     return (
-  <div style={{height:`${400}px`, backgroundColor:"white", margin:"15px", marginLeft:"300px"}} className="bigCalendar-container">
+  <div>
       <Calendar
         localizer={localizer}
         events={myEventsList}

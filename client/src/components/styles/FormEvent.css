@@ -1,0 +1,8 @@
+.Form { 
+        position: absolute; 
+        text-align: center; 
+        background: lightgray; 
+        border: 1px solid black;
+        width: 280px;
+        height: 100px;
+    } 
