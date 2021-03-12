@@ -5,6 +5,7 @@ import googleauth from './GoogleAuth'
 import Form from "react-jsonschema-form";
 
 
+
 var dict = [];
 
 const schema = {
@@ -40,6 +41,14 @@ const schema = {
         },
         "timeZone": { "type": "string", "title": "TimeZone", "default": " " }
       }
+    },
+    "attendees": {
+      "title": "Attendees",
+      "description": "Click on the buttoms to add or remove your attendees",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }
@@ -54,7 +63,7 @@ const uiSchema = {
       "ui:widget": "alt-datetime",
       "ui:options": {
         "yearsRange": [
-          1980,
+          2021,
           2080
         ]
       }
@@ -65,7 +74,7 @@ const uiSchema = {
       "ui:widget": "alt-datetime",
       "ui:options": {
         "yearsRange": [
-          1980,
+          2021,
           2080
         ]
       }
@@ -73,7 +82,7 @@ const uiSchema = {
   }
 }
 
-
+const log = (type) => console.log.bind(console, type);
 
 
 function CreateEvent(dict) {
@@ -118,7 +127,7 @@ class FormEvent extends React.Component {
           uiSchema={uiSchema}
           onSubmit={onSubmit} />
       </div>
-    );
+    )
   }
 }
 
