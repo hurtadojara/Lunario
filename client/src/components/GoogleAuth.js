@@ -82,11 +82,7 @@ class GoogleAuth extends Component {
       $('#auth-status').html('You are currently signed in and have granted ' +
           'access to this app.');
           google_access_token = googleauth.currentUser.get().getAuthResponse().access_token
-          function appendPre(message) {
-            var pre = document.getElementById('content');
-            var textContent = document.createTextNode(message + '\n');
-            pre.appendChild(textContent);
-          }
+          
           function listUpcomingEvents() {
             gapi.client.load('calendar', 'v3', function () {
             gapi.client.calendar.events.list({
@@ -126,7 +122,7 @@ class GoogleAuth extends Component {
                   
                 }
               } else {
-                appendPre('No upcoming events found.');
+                alert('No upcoming events found.');
               }
             });
           });

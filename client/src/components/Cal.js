@@ -13,6 +13,12 @@ process.REACT_APP_MYEVENTSLIST = [{
 }]
 
   class EventsCalendar extends Component {  
+    componentDidMount() {
+      this.interval = setInterval(() => this.setState({ time: Date.now() }), 3000);
+    }
+    componentWillUnmount() {
+      clearInterval(this.interval);
+    }
     render() {
     return (
   <div>
