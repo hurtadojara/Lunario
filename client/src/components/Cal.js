@@ -3,20 +3,13 @@ import {Calendar, momentLocalizer} from "react-big-calendar";
 import './styles/Cal.css';
 import moment from "moment";
 
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
 require('moment/locale/es.js');
   
   const localizer = momentLocalizer(moment);
 
-const myEventsList= [{
-  title: "today",
-  start: new Date('2021-05-05 10:22:00'),
-  end: new Date('2021-05-05 10:42:00')
-},
-{
-  title: "string",
-   start: new Date('2021-2-12 12:22:00'),
-  end: new Date('2021-02-13 13:42:00')
+process.REACT_APP_MYEVENTSLIST = [{
 }]
 
   class EventsCalendar extends Component {  
@@ -25,12 +18,13 @@ const myEventsList= [{
   <div>
       <Calendar
         localizer={localizer}
-        events={myEventsList}
+        events={process.REACT_APP_MYEVENTSLIST}
         startAccessor="start"
         endAccessor="end"
       />
     </div>);
     }
   }
+
 
 export default EventsCalendar

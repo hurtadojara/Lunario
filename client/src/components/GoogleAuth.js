@@ -2,8 +2,11 @@
 /* eslint-disable no-restricted-globals */
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+import EventsCalendar from "./Cal"
+import myEventsList from "./FormEvent"
 global.googleauth = "" // Google Auth object.
 global.google_access_token = ""
+var i;
 
 class GoogleAuth extends Component {
   state = { isSignedIn: null }
@@ -79,22 +82,58 @@ class GoogleAuth extends Component {
       $('#auth-status').html('You are currently signed in and have granted ' +
           'access to this app.');
           google_access_token = googleauth.currentUser.get().getAuthResponse().access_token
-          var resource = {
-            ///  "kind": "calendar#event",
-        
-            "alwaysIncludeEmail" : "true",
-            "singleEvents" : "true",
-            "orderBy" : "startTime",
-            "timeMax": {
-                "dateTime": "2013-10-01T00:00:00+10:00" //maxDate.toISOString()
-            },
-            "timeMin": {
-                "dateTime":  "2013-08-29T00:00:00+10:00" //startDateMin.toISOString()
-            }
-        };
+          function appendPre(message) {
+            var pre = document.getElementById('content');
+            var textContent = document.createTextNode(message + '\n');
+            pre.appendChild(textContent);
+          }
+          function listUpcomingEvents() {
+            gapi.client.load('calendar', 'v3', function () {
+            gapi.client.calendar.events.list({
+              'calendarId': 'primary',
+              'timeMin': (new Date()).toISOString(),
+              'showDeleted': false,
+              'singleEvents': true,
+              'maxResults': 10,
+              'orderBy': 'startTime'
+            }).then(function(response) {
+              var events = response.result.items;
+              if (events.length > 0) {
+                for (i = 0; i < events.length; i++) {
+                  var props = {
+                  }
+                  if (Date(events[i].start) === Date(events[i].end)) {
+                    props.allDay = true
+                  }
+                  if ("summary" in events[i]) {
+                    props.title = events[i].summary
+                  }
+                  if ("start" in events[i]) {
+                    props.start = events[i].start.dateTime
+                  }
+                  if ("end" in events[i]) {
+                    console.log("siesasiperroooooo")
+                    props.end = events[i].end.dateTime
+                  }
+                  if ("description" in events[i]) {
+                    props.description = events[i].description
+                  }
+                  if ("location" in events[i]) {
+                    props.location = events[i]
+                  }
+                  process.REACT_APP_MYEVENTSLIST.push(props)
+                  props = {}
+                  
+                }
+              } else {
+                appendPre('No upcoming events found.');
+              }
+            });
+          });
+        }     
+          listUpcomingEvents();
+          console.log(process.REACT_APP_MYEVENTSLIST)
 
-        
-    
     } else {
       $('#sign-in-or-out-button').html('Sign In/Authorize');
       $('#revoke-access-button').css('display', 'none');

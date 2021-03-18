@@ -1,45 +1,38 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-restricted-globals */
-import React from "react";
-import googleauth from './GoogleAuth'
-import Form from '@rjsf/bootstrap-4';
-
-
-
-var dict = [];
+import React from 'react';
+import './styles/FormEvent.css';
+import Form from "react-jsonschema-form";
 
 const schema = {
-  "title": "Create an event",
   "type": "object",
   required: [
-    "summary"
+    "summary", "location"
   ],
   "properties": {
-    "summary": { "type": "string", "title": "Summary", "default": "Add  title" },
+    "summary": { "type": "string", "title": "Summary", "default": "Add a title" },
     "location": { "type": "string", "title": "Location", "default": " " },
-    "description": { "type": "string", "title": "Description", "default": "Add a description" },
-    "alternativeStart": {
-      "title": "Start",
+    "description": { "type": "string", "title": "Description", "default": "Add description" },
+    "start": {
+      "title": "Start date",
       "description": "Add a time",
       "type": "object",
       "properties": {
-        "dateTimeStart": {
+        "dateTime": {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "type": "string", "title": "TimeZone", "default": " " }
+        "timeZone": { "type": "string", "title": "TimeZone", "default": "America/Los Angeles" }
       }
     },
-    "alternativeEnd": {
-      "title": "End",
+    "end": {
+      "title": "End date",
       "description": "Add a valid end time",
       "type": "object",
       "properties": {
-        "dateTimeEnd": {
+        "dateTime": {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "type": "string", "title": "TimeZone", "default": " " }
+        "timeZone": { "type": "string", "title": "TimeZone", "default": "America/Bogota" }
       }
     },
     "attendees": {
@@ -50,16 +43,50 @@ const schema = {
         "type": "string"
       }
     }
-  }
-}
-const uiSchema = {
-  "schema": {
-    "description": {
-      "ui:widget": "textarea",
+  },
+  "definitions": {
+    "largeEnum": {
+      "type": "string",
+      "enum": [
+        "SECONDLY",
+        "MINUTELY",
+        "HOURLY",
+        "DAILY",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ]
     }
   },
-  "alternativeStart": {
-    "dateTimeStart": {
+  "lastform": {
+    "title": "Recurrence",
+    "type": "object",
+    "properties": {
+      "recurrence": {
+        "$ref": "#/definitions/largeEnum"
+      },
+      "COUNT": {
+        "type": "integer",
+        "title": "Interval",
+        "minimum": 0,
+        "maximum": 31,
+      }
+    }
+  }
+};
+
+const uiSchema = {
+  "description": {
+    "classNames": "test",
+    "ui:widget": "textarea"
+  },
+  "attendees": {
+    "ui:options": {
+      inputType: 'email'
+    }
+  },
+  "start": {
+    "dateTime": {
       "ui:widget": "alt-datetime",
       "ui:options": {
         "yearsRange": [
@@ -69,8 +96,8 @@ const uiSchema = {
       }
     }
   },
-  "alternativeEnd": {
-    "dateTimeEnd": {
+  "end": {
+    "dateTime": {
       "ui:widget": "alt-datetime",
       "ui:options": {
         "yearsRange": [
@@ -84,50 +111,39 @@ const uiSchema = {
 
 const log = (type) => console.log.bind(console, type);
 
+class FormEvent extends React.Component {
 
-function CreateEvent(dict) {
-  gapi.client.load('calendar', 'v3', function () {
-    var req = gapi.client.calendar.events.insert({
-      'calendarId': 'primary',
-      "resource": dict
-    });
-    req.execute(function (event) {
-      console.log('Event created: ' + event.htmlLink);
-    });
-  });
-}
-
-
-const onSubmit = ({ formData }, e) => handleEvent(formData);
-
-function handleEvent(formData) {
-
-
-  CreateEvent()
-  function CreateEvent(dict) {
-    gapi.client.load('calendar', 'v3', function () {
-      var req = gapi.client.calendar.events.insert({
-        'calendarId': 'primary',
-        "resource": dict
-      });
-      req.execute(function (event) {
-        console.log('Event created: ' + event.htmlLink);
-      });
-    });
+  state = {
+    show: false
   }
 
-}
+  createButtom = () => {
+    this.setState({ show: !this.state.show })
+  }
 
-
-class FormEvent extends React.Component {
   render() {
-    return (
-      <div className="Form">
-        <Form schema={schema}
-          uiSchema={uiSchema}
-          onSubmit={onSubmit} />
-      </div>
-    )
+    if (this.state.show) {
+      return (
+        <div id="eventDesing">
+          Fill the form
+          <p></p>
+          <Form schema={schema}
+            onChange={log("changed")}
+            onSubmit={log("submitted")}
+            onError={log("errors")}
+            uiSchema={uiSchema} />
+          <div id="submit-btn">
+            <button id="submitEvent" onClick={this.createButtom} type="submit" class="btn btn-info">Done!</button>
+          </div>
+        </div>
+      );
+    } else {
+      return <h1>
+        <button onClick={this.createButtom} class="btn btn-info btn-xs">
+          Create Event
+        </button>
+      </h1>
+    }
   }
 }
 
