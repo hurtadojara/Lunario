@@ -18,11 +18,11 @@ const schema = {
       "description": "Add a time",
       "type": "object",
       "properties": {
+        "timeZone": { "$ref": "#/definitions/largeEnum" },
         "dateTime": {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "$ref": "#/definitions/largeEnum" }
       }
     },
     "end": {
@@ -34,27 +34,11 @@ const schema = {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "$ref": "#/definitions/largeEnum" }
-      }
-    },
-    "lastform": {
-      "title": "Recurrence",
-      "type": "object",
-      "properties": {
-        "recurrence": {
-          "$ref": "#/definitions/largeEnum"
-        },
-        "COUNT": {
-          "type": "integer",
-          "title": "Interval",
-          "minimum": 0,
-          "maximum": 31,
-        }
       }
     },
     "attendees": {
       "title": "Attendees",
-      "description": "Click on the buttoms to add or remove your attendees",
+      "description": "attendees separated by a comma, except the last one",
       "type": "string",
     }
   },
@@ -64,32 +48,18 @@ const schema = {
       "enum": [
         "America/Los_Angeles",
         "United_Kingdom/London",
-        "Germany/Berlin",
+        "Europe/Berlin",
         "India/Mumbai",
         "Singapore/Singapore",
         "China/Beijing",
         "Japan/Tokyo",
         "Australia/Sydney",
         "New_Zeland/Auckland",
-        "Colombia/Bogota",
+        "America/Bogota",
         "United_Arab_Emirates/Dubai"
       ]
     }
   },
-   "definitions": {
-    "largeEnum": {
-      "type": "string",
-      "enum": [
-        "SECONDLY",
-        "MINUTELY",
-        "HOURLY",
-        "DAILY",
-        "WEEKLY",
-        "MONTHLY",
-        "YEARLY"
-      ]
-    }
-  }
 };
 
 const uiSchema = {
@@ -156,7 +126,40 @@ function handleEvent(formData) {
     formData.attendees = finalAttendees
     console.log(formData.attendees)
   }
+  // HERE WE FORMAT THE DATE TO CREATE THE 
+  // EVENT ON APPROPIATE DTIME                                                  
+//var arr =  {"America/Los_Angeles",
+ // "United_Kingdom/London",
+ // "Germany/Berlin",
+ // "India/Mumbai",
+ // "Singapore/Singapore",
+  //"China/Beijing",
+  //"Japan/Tokyo",
+  //"Australia/Sydney",
+  //"New_Zeland/Auckland",
+  //"Colombia/Bogota",
+  //"United_Arab_Emirates/Dubai"
+//}
+  if (formData.start.timeZone !== undefined) {
 
+    if (formData.start.timeZone === "America/Bogota") {
+      formData.start.dateTime = formData.start.dateTime.replace(/.{5}$/, '-05:00');
+      formData.end.dateTime = formData.end.dateTime.replace(/.{5}$/, '-05:00');
+      formData.end.timeZone = formData.start.timeZone
+    }
+    if (formData.start.timeZone === "America/Los_Angeles") {
+      formData.start.dateTime = formData.start.dateTime.replace(/.{5}$/, '-07:00');
+      formData.end.dateTime = formData.end.dateTime.replace(/.{5}$/, '-07:00');
+      formData.end.timeZone = formData.start.timeZone
+    }
+    if (formData.start.timeZone === "America/Bogota") {
+      formData.start.dateTime = formData.start.dateTime.replace(/.{5}$/, '-05:00');
+      formData.end.dateTime = formData.end.dateTime.replace(/.{5}$/, '-05:00');
+      formData.end.timeZone = formData.start.timeZone
+    }
+
+  }
+  console.log(formData)
   CreateEvent(formData)
   function CreateEvent(dict) {
     gapi.client.load('calendar', 'v3', function () {
@@ -173,6 +176,7 @@ function handleEvent(formData) {
         if (event.htmlLink === undefined){
           alert("Ha ingresado erroneamente los datos.\nNo se ha creado el evento.")
         }
+        formData = undefined
       });
     });
   }

@@ -108,7 +108,6 @@ class GoogleAuth extends Component {
                     props.start = events[i].start.dateTime
                   }
                   if ("end" in events[i]) {
-                    console.log("siesasiperroooooo")
                     props.end = events[i].end.dateTime
                   }
                   if ("description" in events[i]) {
