@@ -8,8 +8,9 @@
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: rgb(134, 170, 236);
-    font: oblique bold 109% cursive;
+    background-color:lightseagreen;
+    font-family: sans-serif;
+    font-size: medium;
     position: absolute; 
     text-align: center; 
 }

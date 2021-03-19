@@ -22,7 +22,7 @@ const schema = {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "type": "string", "title": "TimeZone", "default": "America/Los Angeles" }
+        "timeZone": { "$ref": "#/definitions/largeEnum" }
       }
     },
     "end": {
@@ -34,7 +34,22 @@ const schema = {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "type": "string", "title": "TimeZone", "default": "America/Bogota" }
+        "timeZone": { "$ref": "#/definitions/largeEnum" }
+      }
+    },
+    "lastform": {
+      "title": "Recurrence",
+      "type": "object",
+      "properties": {
+        "recurrence": {
+          "$ref": "#/definitions/largeEnum"
+        },
+        "COUNT": {
+          "type": "integer",
+          "title": "Interval",
+          "minimum": 0,
+          "maximum": 31,
+        }
       }
     },
     "attendees": {
@@ -47,6 +62,24 @@ const schema = {
     "largeEnum": {
       "type": "string",
       "enum": [
+        "America/Los_Angeles",
+        "United_Kingdom/London",
+        "Germany/Berlin",
+        "India/Mumbai",
+        "Singapore/Singapore",
+        "China/Beijing",
+        "Japan/Tokyo",
+        "Australia/Sydney",
+        "New_Zeland/Auckland",
+        "Colombia/Bogota",
+        "United_Arab_Emirates/Dubai"
+      ]
+    }
+  },
+   "definitions": {
+    "largeEnum": {
+      "type": "string",
+      "enum": [
         "SECONDLY",
         "MINUTELY",
         "HOURLY",
@@ -55,21 +88,6 @@ const schema = {
         "MONTHLY",
         "YEARLY"
       ]
-    }
-  },
-  "lastform": {
-    "title": "Recurrence",
-    "type": "object",
-    "properties": {
-      "recurrence": {
-        "$ref": "#/definitions/largeEnum"
-      },
-      "COUNT": {
-        "type": "integer",
-        "title": "Interval",
-        "minimum": 0,
-        "maximum": 31,
-      }
     }
   }
 };
@@ -122,6 +140,7 @@ function CreateEvent(dict) {
 const onSubmit = ({ formData }, e) => handleEvent(formData);
 
 function handleEvent(formData) {
+<<<<<<< HEAD
   if (formData.attendees) {
     var inv = []
     var finalAttendees = [{}]
@@ -134,6 +153,33 @@ function handleEvent(formData) {
       var jText = initstring + mail + laststring
       inv[invited] = JSON.parse(jText)
       finalAttendees.push(inv[invited])
+=======
+  var event = {
+    'summary': 'Google I/O 2015',
+    'location': '800 Howard St., San Francisco, CA 94103',
+    'description': 'A chance to hear more about Google\'s developer products.',
+    'start': {
+      'timeZone': 'America/Los_Angeles',
+      'dateTime': '2015-05-28T09:00:00-07:00'
+    },
+    'end': {
+      'dateTime': '2015-05-28T17:00:00-07:00',
+      'timeZone': 'America/Los_Angeles'
+    },
+    'recurrence': [
+      'RRULE:FREQ=DAILY;COUNT=2'
+    ],
+    'attendees': [
+      { 'email': 'lpage@example.com' },
+      { 'email': 'sbrin@example.com' }
+    ],
+    'reminders': {
+      'useDefault': false,
+      'overrides': [
+        { 'method': 'email', 'minutes': 24 * 60 },
+        { 'method': 'popup', 'minutes': 10 }
+      ]
+>>>>>>> dd7297504b6b70a0d842007bf7e15c473d9d7fdc
     }
     finalAttendees.shift()
     formData.attendees = finalAttendees
@@ -152,8 +198,12 @@ function handleEvent(formData) {
         alert('Event created: ' + event.htmlLink)
         }
         setTimeout(3000)
+<<<<<<< HEAD
         console.log(formData)
         if (event.htmlLink === undefined){
+=======
+        if (event.htmlLink == undefined) {
+>>>>>>> dd7297504b6b70a0d842007bf7e15c473d9d7fdc
           alert("Ha ingresado erroneamente los datos.\nNo se ha creado el evento.")
         }
       });
