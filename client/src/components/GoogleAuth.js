@@ -22,17 +22,21 @@ export function listUpcomingEvents() {
       for (i = 0; i < events.length; i++) {
         var props = {
         }
-        if (Date(events[i].start) === Date(events[i].end)) {
+        if (events[i].start.dateTime === events[i].end.dateTime) {
           props.allDay = true
         }
         if ("summary" in events[i]) {
           props.title = events[i].summary
         }
         if ("start" in events[i]) {
-          props.start = events[i].start.dateTime
+          let dat = new Date(events[i].start.dateTime)
+          //events[i].start.dateTime = events[i].start.dateTime.replace(/.{6}$/, '.000Z')
+          props.start = dat
         }
         if ("end" in events[i]) {
-          props.end = events[i].end.dateTime
+          let dat = new Date(events[i].end.dateTime)
+          //events[i].end.dateTime = events[i].end.dateTime.replace(/.{6}$/, '.000Z')
+          props.end = dat
         }
         if ("description" in events[i]) {
           props.description = events[i].description
@@ -43,6 +47,8 @@ export function listUpcomingEvents() {
         process.REACT_APP_MYEVENTSLIST.push(props)
         props = {}
       }
+      console.log(process.REACT_APP_MYEVENTSLIST)
+
     } else {
       alert('No upcoming events found.');
     }

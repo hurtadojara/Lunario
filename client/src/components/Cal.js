@@ -24,6 +24,7 @@ process.REACT_APP_MYEVENTSLIST = [{
   <div>
       <Calendar
         localizer={localizer}
+        popup={true}
         events={process.REACT_APP_MYEVENTSLIST}
         startAccessor="start"
         endAccessor="end"
