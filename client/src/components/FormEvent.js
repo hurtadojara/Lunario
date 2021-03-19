@@ -40,10 +40,7 @@ const schema = {
     "attendees": {
       "title": "Attendees",
       "description": "Click on the buttoms to add or remove your attendees",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "type": "string",
     }
   },
   "definitions": {
@@ -81,11 +78,6 @@ const uiSchema = {
   "description": {
     "classNames": "test",
     "ui:widget": "textarea"
-  },
-  "attendees": {
-    "ui:options": {
-      inputType: 'email'
-    }
   },
   "start": {
     "dateTime": {
@@ -130,35 +122,24 @@ function CreateEvent(dict) {
 const onSubmit = ({ formData }, e) => handleEvent(formData);
 
 function handleEvent(formData) {
-  var event = {
-    'summary': 'Google I/O 2015',
-    'location': '800 Howard St., San Francisco, CA 94103',
-    'description': 'A chance to hear more about Google\'s developer products.',
-    'start': {
-      'timeZone': 'America/Los_Angeles',
-      'dateTime': '2015-05-28T09:00:00-07:00'
-    },
-    'end': {
-      'dateTime': '2015-05-28T17:00:00-07:00',
-      'timeZone': 'America/Los_Angeles'
-    },
-    'recurrence': [
-      'RRULE:FREQ=DAILY;COUNT=2'
-    ],
-    'attendees': [
-      {'email': 'lpage@example.com'},
-      {'email': 'sbrin@example.com'}
-    ],
-    'reminders': {
-      'useDefault': false,
-      'overrides': [
-        {'method': 'email', 'minutes': 24 * 60},
-        {'method': 'popup', 'minutes': 10}
-      ]
+  if (formData.attendees) {
+    var inv = []
+    var finalAttendees = [{}]
+    var initstring = "\{\"email\":\""
+    var laststring = "\"\}"
+    formData.attendees = formData.attendees.replace(/\s+/g, '');
+    inv = formData.attendees.split(',')
+    for(var invited of inv) {
+      var mail = invited
+      var jText = initstring + mail + laststring
+      inv[invited] = JSON.parse(jText)
+      finalAttendees.push(inv[invited])
     }
-  };
-  //console.log(event)
-  //console.log(formData)
+    finalAttendees.shift()
+    formData.attendees = finalAttendees
+    console.log(formData.attendees)
+  }
+
   CreateEvent(formData)
   function CreateEvent(dict) {
     gapi.client.load('calendar', 'v3', function () {
@@ -167,9 +148,12 @@ function handleEvent(formData) {
         "resource": dict
       });
       req.execute(function (event) {
+        if (event.htmlLink) {
         alert('Event created: ' + event.htmlLink)
+        }
         setTimeout(3000)
-        if (event.htmlLink == undefined){
+        console.log(formData)
+        if (event.htmlLink === undefined){
           alert("Ha ingresado erroneamente los datos.\nNo se ha creado el evento.")
         }
       });
@@ -198,13 +182,13 @@ class FormEvent extends React.Component {
             onError={log("errors")}
             uiSchema={uiSchema} />
           <div id="submit-btn">
-            <button id="submitEvent" onClick={this.createButtom} type="submit" class="btn btn-info">Done!</button>
+            <button id="submitEvent" onClick={this.createButtom} type="submit" className="btn btn-info">Done!</button>
           </div>
         </div>
       );
     } else {
       return <h1>
-        <button onClick={this.createButtom} class="btn btn-info btn-xs">
+        <button onClick={this.createButtom} className="btn btn-info btn-xs">
           Create Event
         </button>
       </h1>
