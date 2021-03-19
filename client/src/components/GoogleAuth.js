@@ -7,6 +7,48 @@ import myEventsList from "./FormEvent"
 global.googleauth = "" // Google Auth object.
 global.google_access_token = ""
 var i;
+export function listUpcomingEvents() {
+  gapi.client.load('calendar', 'v3', function () {
+  gapi.client.calendar.events.list({
+    'calendarId': 'primary',
+    'timeMin': (new Date()).toISOString(),
+    'showDeleted': false,
+    'singleEvents': true,
+    'maxResults': 50,
+    'orderBy': 'startTime'
+  }).then(function(response) {
+    var events = response.result.items;
+    if (events.length > 0) {
+      for (i = 0; i < events.length; i++) {
+        var props = {
+        }
+        if (Date(events[i].start) === Date(events[i].end)) {
+          props.allDay = true
+        }
+        if ("summary" in events[i]) {
+          props.title = events[i].summary
+        }
+        if ("start" in events[i]) {
+          props.start = events[i].start.dateTime
+        }
+        if ("end" in events[i]) {
+          props.end = events[i].end.dateTime
+        }
+        if ("description" in events[i]) {
+          props.description = events[i].description
+        }
+        if ("location" in events[i]) {
+          props.location = events[i]
+        }
+        process.REACT_APP_MYEVENTSLIST.push(props)
+        props = {}
+      }
+    } else {
+      alert('No upcoming events found.');
+    }
+  });
+})
+}
 
 class GoogleAuth extends Component {
   state = { isSignedIn: null }
@@ -83,50 +125,7 @@ class GoogleAuth extends Component {
           'access to this app.');
           google_access_token = googleauth.currentUser.get().getAuthResponse().access_token
 
-          function listUpcomingEvents() {
-            gapi.client.load('calendar', 'v3', function () {
-            gapi.client.calendar.events.list({
-              'calendarId': 'primary',
-              'timeMin': (new Date()).toISOString(),
-              'showDeleted': false,
-              'singleEvents': true,
-              'maxResults': 50,
-              'orderBy': 'startTime'
-            }).then(function(response) {
-              var events = response.result.items;
-              if (events.length > 0) {
-                for (i = 0; i < events.length; i++) {
-                  var props = {
-                  }
-                  if (Date(events[i].start) === Date(events[i].end)) {
-                    props.allDay = true
-                  }
-                  if ("summary" in events[i]) {
-                    props.title = events[i].summary
-                  }
-                  if ("start" in events[i]) {
-                    props.start = events[i].start.dateTime
-                  }
-                  if ("end" in events[i]) {
-                    props.end = events[i].end.dateTime
-                  }
-                  if ("description" in events[i]) {
-                    props.description = events[i].description
-                  }
-                  if ("location" in events[i]) {
-                    props.location = events[i]
-                  }
-                  process.REACT_APP_MYEVENTSLIST.push(props)
-                  props = {}
-                }
-              } else {
-                alert('No upcoming events found.');
-              }
-            });
-          });
-        }     
           listUpcomingEvents();
-          console.log(process.REACT_APP_MYEVENTSLIST)
 
     } else {
       $('#sign-in-or-out-button').html('Sign In/Authorize');

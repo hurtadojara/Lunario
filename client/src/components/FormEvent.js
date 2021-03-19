@@ -3,6 +3,9 @@
 import React from 'react';
 import './styles/FormEvent.css';
 import Form from "react-jsonschema-form";
+import GoogleAuth from './GoogleAuth';
+import {listUpcomingEvents, REACT_APP_MYEVENTSLIST} from './GoogleAuth'
+
 
 const schema = {
   "type": "object",
@@ -176,6 +179,8 @@ function handleEvent(formData) {
         if (event.htmlLink === undefined){
           alert("Missing or incorrect data.\nthe event has not been created.")
         }
+        process.REACT_APP_MYEVENTSLIST = [{}]
+        listUpcomingEvents()
         formData = undefined
       });
     });
