@@ -34,25 +34,6 @@ const schema = {
           "type": "string",
           "format": "date-time"
         },
-<<<<<<< HEAD
-=======
-        "timeZone": { "$ref": "#/definitions/largeEnum" }
-      }
-    },
-    "lastform": {
-      "title": "Recurrence",
-      "type": "object",
-      "properties": {
-        "recurrence": {
-          "$ref": "#/definitions/largeEnum"
-        },
-        "COUNT": {
-          "type": "integer",
-          "title": "Interval of days",
-          "minimum": 0,
-          "maximum": 31,
-        }
->>>>>>> fa615cf2765d6cca3e1a7415d82007fb17337110
       }
     },
     "attendees": {
@@ -79,23 +60,6 @@ const schema = {
       ]
     }
   },
-<<<<<<< HEAD
-=======
-   "uwu": {
-    "largeEnum": {
-      "type": "string",
-      "enum": [
-        "SECONDLY",
-        "MINUTELY",
-        "HOURLY",
-        "DAILY",
-        "WEEKLY",
-        "MONTHLY",
-        "YEARLY"
-      ]
-    }
-  }
->>>>>>> fa615cf2765d6cca3e1a7415d82007fb17337110
 };
 
 const uiSchema = {
@@ -245,11 +209,7 @@ class FormEvent extends React.Component {
       );
     } else {
       return <h1>
-<<<<<<< HEAD
-        <button onClick={this.createButtom} className="btn btn-info btn-xs">
-=======
         <button onClick={this.createButtom} id="uwu" class="btn btn-info btn-xs">
->>>>>>> fa615cf2765d6cca3e1a7415d82007fb17337110
           Create Event
         </button>
       </h1>
