@@ -131,8 +131,6 @@ class GoogleAuth extends Component {
     } else {
       $('#sign-in-or-out-button').html('Sign In/Authorize');
       $('#revoke-access-button').css('display', 'none');
-      $('#auth-status').html('You have not authorized this app or you are ' +
-          'signed out.');
     }
   }
 
@@ -146,7 +144,6 @@ class GoogleAuth extends Component {
       <div>
         <button id="sign-in-or-out-button">Sign In/Authorize</button>
         <button id="revoke-access-button">Revoke access</button>
-        <div id="auth-status"></div>
       </div>
     )
   }

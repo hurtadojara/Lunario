@@ -152,7 +152,7 @@ function handleEvent(formData) {
       formData.end.dateTime = formData.end.dateTime.replace(/.{5}$/, '-07:00');
       formData.end.timeZone = formData.start.timeZone
     }
-    if (formData.start.timeZone === "America/Bogota") {
+    if (formData.start.timeZone === "ZONA HORARIA CUALQUIER LUGAR") {
       formData.start.dateTime = formData.start.dateTime.replace(/.{5}$/, '-05:00');
       formData.end.dateTime = formData.end.dateTime.replace(/.{5}$/, '-05:00');
       formData.end.timeZone = formData.start.timeZone
@@ -169,12 +169,12 @@ function handleEvent(formData) {
       });
       req.execute(function (event) {
         if (event.htmlLink) {
-        alert('Event created: ' + event.htmlLink)
+        alert('Event created!')
         }
         setTimeout(3000)
         console.log(formData)
         if (event.htmlLink === undefined){
-          alert("Ha ingresado erroneamente los datos.\nNo se ha creado el evento.")
+          alert("Missing or incorrect data.\nthe event has not been created.")
         }
         formData = undefined
       });
@@ -209,7 +209,7 @@ class FormEvent extends React.Component {
       );
     } else {
       return <h1>
-        <button onClick={this.createButtom} id="uwu" class="btn btn-info btn-xs">
+        <button onClick={this.createButtom} id="uwu" className="btn btn-info btn-xs">
           Create Event
         </button>
       </h1>
