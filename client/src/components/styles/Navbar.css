@@ -1,7 +1,7 @@
 .Navbar {
   width: 100%;
   padding: 0.5rem 0;
-  background-color: #edf4f5;
+  background-color:lightseagreen;
   opacity: 1.0;
 }
 
@@ -20,7 +20,6 @@
 .Navbar__brand-logo {
   margin-right: 0.5rem;
   width:50px;
-  
 }
 
 .fuente1 {
@@ -41,5 +40,11 @@
   cursor: pointer;
   padding: 12px 20px;
   border-radius: 10px;
-  
 }
+
+#auth-status, .fuente1{
+  font-weight: bold;
+}
+
+
+

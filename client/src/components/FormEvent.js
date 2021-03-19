@@ -46,7 +46,7 @@ const schema = {
         },
         "COUNT": {
           "type": "integer",
-          "title": "Interval",
+          "title": "Interval of days",
           "minimum": 0,
           "maximum": 31,
         }
@@ -79,7 +79,7 @@ const schema = {
       ]
     }
   },
-   "definitions": {
+   "uwu": {
     "largeEnum": {
       "type": "string",
       "enum": [
@@ -222,7 +222,7 @@ class FormEvent extends React.Component {
       );
     } else {
       return <h1>
-        <button onClick={this.createButtom} class="btn btn-info btn-xs">
+        <button onClick={this.createButtom} id="uwu" class="btn btn-info btn-xs">
           Create Event
         </button>
       </h1>
