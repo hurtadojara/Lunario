@@ -22,7 +22,7 @@ const schema = {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "type": "string", "title": "TimeZone", "default": "America/Los Angeles" }
+        "timeZone": { "$ref": "#/definitions/largeEnum" }
       }
     },
     "end": {
@@ -34,7 +34,22 @@ const schema = {
           "type": "string",
           "format": "date-time"
         },
-        "timeZone": { "type": "string", "title": "TimeZone", "default": "America/Bogota" }
+        "timeZone": { "$ref": "#/definitions/largeEnum" }
+      }
+    },
+    "lastform": {
+      "title": "Recurrence",
+      "type": "object",
+      "properties": {
+        "recurrence": {
+          "$ref": "#/definitions/largeEnum"
+        },
+        "COUNT": {
+          "type": "integer",
+          "title": "Interval",
+          "minimum": 0,
+          "maximum": 31,
+        }
       }
     },
     "attendees": {
@@ -50,6 +65,24 @@ const schema = {
     "largeEnum": {
       "type": "string",
       "enum": [
+        "America/Los_Angeles",
+        "United_Kingdom/London",
+        "Germany/Berlin",
+        "India/Mumbai",
+        "Singapore/Singapore",
+        "China/Beijing",
+        "Japan/Tokyo",
+        "Australia/Sydney",
+        "New_Zeland/Auckland",
+        "Colombia/Bogota",
+        "United_Arab_Emirates/Dubai"
+      ]
+    }
+  },
+   "definitions": {
+    "largeEnum": {
+      "type": "string",
+      "enum": [
         "SECONDLY",
         "MINUTELY",
         "HOURLY",
@@ -58,21 +91,6 @@ const schema = {
         "MONTHLY",
         "YEARLY"
       ]
-    }
-  },
-  "lastform": {
-    "title": "Recurrence",
-    "type": "object",
-    "properties": {
-      "recurrence": {
-        "$ref": "#/definitions/largeEnum"
-      },
-      "COUNT": {
-        "type": "integer",
-        "title": "Interval",
-        "minimum": 0,
-        "maximum": 31,
-      }
     }
   }
 };
@@ -146,14 +164,14 @@ function handleEvent(formData) {
       'RRULE:FREQ=DAILY;COUNT=2'
     ],
     'attendees': [
-      {'email': 'lpage@example.com'},
-      {'email': 'sbrin@example.com'}
+      { 'email': 'lpage@example.com' },
+      { 'email': 'sbrin@example.com' }
     ],
     'reminders': {
       'useDefault': false,
       'overrides': [
-        {'method': 'email', 'minutes': 24 * 60},
-        {'method': 'popup', 'minutes': 10}
+        { 'method': 'email', 'minutes': 24 * 60 },
+        { 'method': 'popup', 'minutes': 10 }
       ]
     }
   };
@@ -169,7 +187,7 @@ function handleEvent(formData) {
       req.execute(function (event) {
         alert('Event created: ' + event.htmlLink)
         setTimeout(3000)
-        if (event.htmlLink == undefined){
+        if (event.htmlLink == undefined) {
           alert("Ha ingresado erroneamente los datos.\nNo se ha creado el evento.")
         }
       });
