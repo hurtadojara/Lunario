@@ -1,12 +1,13 @@
+/* This section contains the jsonschema Form that is used to create an event on the calendar,
+   on the same time you can visualize the event on all the calendar associated to the user account*/
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 import React from 'react';
 import './styles/FormEvent.css';
 import Form from "react-jsonschema-form";
-import GoogleAuth from './GoogleAuth';
 import {listUpcomingEvents, REACT_APP_MYEVENTSLIST} from './GoogleAuth'
 
-
+/* Define the structure of the jsonschema Form*/
 const schema = {
   "type": "object",
   required: [
@@ -65,6 +66,7 @@ const schema = {
   },
 };
 
+/* Define part of the style of the jsonschema Form*/
 const uiSchema = {
   "description": {
     "classNames": "test",
@@ -94,9 +96,13 @@ const uiSchema = {
   }
 }
 
+/* Catch the type of log:
+   -onChange: if some value of the jsonform was changed via HTTP request
+   -onSubmit: get a dictionary with the values of the form
+   -onError: handle the errors that may occur with the json*/
 const log = (type) => console.log.bind(console, type);
 
-
+/* Create an event via Google Calendar API*/
 function CreateEvent(dict) {
   gapi.client.load('calendar', 'v3', function () {
     var req = gapi.client.calendar.events.insert({
@@ -109,7 +115,7 @@ function CreateEvent(dict) {
   });
 }
 
-
+/* Store the data of the jsonForm and save the emails data on a list of dicts*/
 const onSubmit = ({ formData }, e) => handleEvent(formData);
 function handleEvent(formData) {
     if (formData.attendees) {
@@ -143,6 +149,8 @@ function handleEvent(formData) {
   //"Colombia/Bogota",
   //"United_Arab_Emirates/Dubai"
 //}
+
+/* Guarantees the correct format of the time zone */
   if (formData.start.timeZone !== undefined) {
 
     if (formData.start.timeZone === "America/Bogota") {
@@ -163,6 +171,9 @@ function handleEvent(formData) {
 
   }
   console.log(formData)
+  /* - Runs the client of Google Calendar v3, insert the event in the correct format,
+       make a request with a delay of 3000ms and handle errors.
+     - Catch the 10 first upcoming events*/
   CreateEvent(formData)
   function CreateEvent(dict) {
     gapi.client.load('calendar', 'v3', function () {
@@ -185,14 +196,17 @@ function handleEvent(formData) {
       });
     });
   }
-
 }
 
+/* Extend react component to a class, this class is render with the calendar*/
 class FormEvent extends React.Component {
   state = {
     show: false
   }
 
+/* The code below render a div with the jsonschema Form, the schema is deploy by
+    a button "Create event, when is submitted an event the "submit" button closes
+    the form.*/
   createButtom = () => {
     this.setState({ show: !this.state.show })
   }

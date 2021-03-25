@@ -5,6 +5,10 @@ import moment from "moment";
 
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
+/* Component to show the events in our calendar,
+   when a new event is created take 3000ms to be showed in the component;
+   this component includes views by week, month and the agenda.*/
+
 require('moment/locale/es.js');
   
   const localizer = momentLocalizer(moment);

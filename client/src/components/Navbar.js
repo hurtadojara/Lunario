@@ -4,6 +4,8 @@ import logo from "../images/lunario_logo.png"
 import './styles/Navbar.css';
 import GoogleAuth from "./GoogleAuth"
 
+/* This class contains the component Navbar, is the responsible of the authentication
+   process with oauth2*/
 class Navbar extends React.Component {
   render() {
     return (

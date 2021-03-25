@@ -7,6 +7,9 @@ import myEventsList from "./FormEvent"
 global.googleauth = "" // Google Auth object.
 global.google_access_token = ""
 var i;
+
+/* -Make a sing up and sing out in a secure way
+   -Guarantee the correct values that is needed to create an event.*/
 export function listUpcomingEvents() {
   gapi.client.load('calendar', 'v3', function () {
   gapi.client.calendar.events.list({
