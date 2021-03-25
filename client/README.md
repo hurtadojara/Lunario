@@ -1,3 +1,19 @@
+# Lunario
+
+Below are links to the documentation on which we rely to make this calendar:
+
++[React json-schema-form](https://react-jsonschema-form.readthedocs.io/en/latest/):
+
+Is used that schema to bring in user data and be able to manipulate it to create, edit and delete events.
+
++[Ract bing-calendar](https://github.com/jquense/react-big-calendar):
+
+Is used the react calendar base to develop the project, the documentation is not very clear, so you must have a good knowledge base in react and nodejs.
+
++[Google calendar API documentation](https://developers.google.com/calendar/quickstart/js):
+
+Reading that documentation it was possible to use oauth2 and to be able to synchronize our calendars with other calendars offered on the network.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
