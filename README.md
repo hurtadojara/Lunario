@@ -2,6 +2,10 @@
 
 The files client_secret.json, index.js, package-lock.json, package.json and the chapters db, models; are the prototype of a config mongoDB with ATLAS and express, in this case it was not used because the mvp was with the use of Google Calendar API.
 
+# MVP app working
+
+The app is alocated within the folder **client** there are the project that contain the calendar and the functions.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
