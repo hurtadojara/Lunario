@@ -1,8 +1,7 @@
-FROM node:alpine
+FROM node
 WORKDIR '/app'
 
 COPY package.json .
-RUN npm install client/
-COPY . ..
-CMD ["npm","start","client/"]
-
+RUN npm install --legacy-peer-deps
+COPY . .
+CMD ["npm","start"]
