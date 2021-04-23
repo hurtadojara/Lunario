@@ -1,18 +1,18 @@
-# Context
+# Lunario
 
-The files client_secret.json, index.js, package-lock.json, package.json and the chapters db, models; are the prototype of a config mongoDB with ATLAS and express, in this case it was not used because the mvp was with the use of Google Calendar API, but the mongoDB and the CRUD system is already to use.
+Below are links to the documentation on which we rely to make this calendar:
 
-# MVP app working
++[React json-schema-form](https://react-jsonschema-form.readthedocs.io/en/latest/):
 
-The app is alocated within the folder **client** there are the project that contain the calendar and the functions.
+Is used that schema to bring in user data and be able to manipulate it to create, edit and delete events.
 
-# Documentation:
++[Ract bing-calendar](https://github.com/jquense/react-big-calendar):
 
-+[ATLAS](https://docs.atlas.mongodb.com/):
+Is used the react calendar base to develop the project, the documentation is not very clear, so you must have a good knowledge base in react and nodejs.
 
-Connect ATLAS with a mongo data base.
++[Google calendar API documentation](https://developers.google.com/calendar/quickstart/js):
 
-+[Syntaxis and CRUD](https://docs.mongodb.com/)
+Reading that documentation it was possible to use oauth2 and to be able to synchronize our calendars with other calendars offered on the network.
 
 # Getting Started with Create React App
 
@@ -84,7 +84,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-sudo npm install -g nodemon
-run it with "npm run dev (locally)" if youre uploading to your domain use "npm run dev build"
-DONT MOVE THE FOLDERS
